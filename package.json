@@ -1,0 +1,31 @@
+{
+  "name": "api-bookspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariavnn/API-BookSpace.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariavnn/API-BookSpace/issues"
+  },
+  "homepage": "https://github.com/mariavnn/API-BookSpace#readme",
+  "devDependencies": {
+    "standard": "^17.1.2",
+    "typescript": "^5.9.2"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  },
+  "dependencies": {
+    "express": "5.1.0"
+  }
+}
