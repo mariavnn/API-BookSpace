@@ -1,2 +1,15 @@
-## REQUEST DE PRUEBA
-GET http://localhost:3000/
+# ## REQUEST PRUEBA 
+# GET http://localhost:3000/ 
+
+## REQUEST REGISTER
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "name": "Victoria Nieto", 
+    "email": "marianieto@gmail.com",
+    "username": "mariavnn",
+    "age": 18,
+    "password": "12345678",
+    "confirmPassword": "12345678"
+}

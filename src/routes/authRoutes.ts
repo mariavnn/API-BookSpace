@@ -1,12 +1,22 @@
 import { Router } from "express";
+import { AuthController } from "../controllers/authController";
+import { AuthService } from "../services/authService";
+import { AuthModel } from "../models/userModel";
 
-const authRoutes = Router();
+export const authRoutes = ({ authModel } : {authModel : AuthModel}) => {
+    const authRouter = Router();
 
-authRoutes.get("/me", requireSignin, myuser); //Route para obtener informacion personal
-authRoutes.get("/user/:id", requireSignin, getUserByID) //Route para obtener informacion de un usuario
+    const authService = new AuthService({authModel});
+    const authController = new AuthController({authService});
 
-authRoutes.post("/signin", singin); //Route for user login
-authRoutes.post("/signup", signup); //Router for user registration
-authRoutes.post("logout", logout); //Router for log out
+    // authRoutes.get("/me", requireSignin, myuser); //Route para obtener informacion personal
+    // authRoutes.get("/user/:id", requireSignin, getUserByID) //Route para obtener informacion de un usuario
 
-export default authRoutes;
+    // authRoutes.post("/signin", singin); //Route for user login
+    authRouter.post("/signup", authController.register); //Router for user registration
+    // authRoutes.post("logout", logout); //Router for log out
+
+    return authRouter;
+}
+ 
+

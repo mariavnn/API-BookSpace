@@ -1,17 +1,27 @@
-import express, { type Request, type Response } from 'express';
-import authRoutes from './routes/authRoutes';
+import express, { json, type Request, type Response } from 'express';
+import { authRoutes } from './routes/authRoutes';
+import { corsMiddleware } from './middlewares/cors';
+import { AuthModel } from './models/userModel';
 
-const app = express();
-const PORT = process.env.PORT || 3000;
 
-//TO DO: AGREGAR MIDDLEWARE PARA EL CORS
+export const createApp = () =>{
+    const app = express();
+    const PORT = process.env.PORT || 3000;
 
-app.get("/", (req : Request, res: Response) => {
-    res.send('Welcome to Node.js + TypeScript API');
-})
+    app.use(json())
+    app.use(corsMiddleware())
 
-app.use("/auth", authRoutes);
+    app.get("/", (req : Request, res: Response) => {
+        res.send('Welcome to Node.js + TypeScript API');
+    })
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port http://localhost:${PORT}`);
-}) 
+    const authModelInstance = new AuthModel();
+
+    app.use("/auth", authRoutes({ authModel: authModelInstance }));
+
+    app.listen(PORT, () => {
+        console.log(`Server is running on port http://localhost:${PORT}`);
+    }) 
+}
+
+createApp();
