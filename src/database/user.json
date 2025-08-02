@@ -1,8 +1,26 @@
-[{
-    "id" : "",
+[
+  {
+    "id": "",
     "name": "",
     "email": "",
-    "username": "", 
-    "age": 0,  
+    "username": "",
+    "age": 0,
     "hash_password": ""
-}]
+  },
+  {
+    "id": "ada731fc-ee86-4fc1-98cc-619a9af38cbd",
+    "name": "Victoria Nieto",
+    "email": "marianieto@gmail.com",
+    "username": "mariavnn",
+    "age": 18,
+    "hash_password": "$2b$10$o9kQl50LWuIHrcaoSFLj0.5Kug4MtBJb0LuGZQl/w5fomPzjJotla"
+  },
+  {
+    "id": "4ed121df-dbea-469d-ab07-89f7480a2f98",
+    "name": "Victoria Nieto",
+    "email": "marianieto29@gmail.com",
+    "username": "mariavnn22",
+    "age": 18,
+    "hash_password": "$2b$10$dNfivVqFpUkwEe95Eh74AepYGPnbsyI791RRQagapilAsIq04VnRO"
+  }
+]

@@ -7,8 +7,8 @@ Content-Type: application/json
 
 {
     "name": "Victoria Nieto", 
-    "email": "marianieto@gmail.com",
-    "username": "mariavnn",
+    "email": "marianieto29@gmail.com",
+    "username": "mariavnn22",
     "age": 18,
     "password": "12345678",
     "confirmPassword": "12345678"

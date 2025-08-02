@@ -19,8 +19,8 @@ export class AuthController {
         try{
             const user = await this.authService.register(result.data as UserRegister)
             return res.status(201).json({ message: "User created successfully", user })
-        }catch (err){
-            return res.status(500).json({ message : err})
+        }catch (err : any){
+            return res.status(500).json({ message : err.message})
         }
     }
 }
