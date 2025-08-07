@@ -14,5 +14,13 @@
     "username": "mariavnn",
     "age": 18,
     "hash_password": "$2b$10$o9kQl50LWuIHrcaoSFLj0.5Kug4MtBJb0LuGZQl/w5fomPzjJotla"
+  },
+  {
+    "id": "801bb645-61c0-43ea-8cf8-d8e332651814",
+    "name": "Victoria Nieto",
+    "email": "marianieto29@gmail.com",
+    "username": "mariavnn22",
+    "age": 18,
+    "hash_password": "$2b$10$byMlxurV5iB1LsP6iwLAieHIYXZinee7YOMqYwdHQdmR9eGjORc8a"
   }
 ]

@@ -4,6 +4,7 @@ import { AuthModel } from "../models/userModel";
 import bcryptjs from "bcryptjs"
 import { randomUUID } from "node:crypto";
 import { UserRegister } from "../schemas/authSchema";
+import { HttpException } from "../utils/httpException";
 
 export class AuthService {
     private authModel : AuthModel
@@ -17,7 +18,7 @@ export class AuthService {
         
         
         if(findUser){
-            throw new Error("User with this data already existed");
+            throw new HttpException(400, "User already existed");
         }
 
         const hash_password = await bcryptjs.hash(password, 10);

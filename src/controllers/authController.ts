@@ -1,4 +1,4 @@
-import { Request, Response } from "express"
+import { NextFunction, Request, Response } from "express"
 import { UserRegister, validateRegister } from "../schemas/authSchema"
 import { AuthService } from "../services/authService";
 import { error } from "console";
@@ -9,7 +9,7 @@ export class AuthController {
         this.authService = authService;
     }
 
-    register = async (req : Request, res : Response) => {
+    register = async (req : Request, res : Response, next: NextFunction) => {
         const result = validateRegister(req.body);
 
         if(!result.success){
@@ -19,8 +19,8 @@ export class AuthController {
         try{
             const user = await this.authService.register(result.data as UserRegister)
             return res.status(201).json({ message: "User created successfully", user })
-        }catch (err : any){
-            return res.status(500).json({ message : err.message})
+        }catch (err){
+           next(err);
         }
     }
 }
