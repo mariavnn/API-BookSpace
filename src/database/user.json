@@ -1,13 +1,5 @@
 [
   {
-    "id": "",
-    "name": "",
-    "email": "",
-    "username": "",
-    "age": 0,
-    "hash_password": ""
-  },
-  {
     "id": "ada731fc-ee86-4fc1-98cc-619a9af38cbd",
     "name": "Victoria Nieto",
     "email": "marianieto@gmail.com",

@@ -12,7 +12,7 @@ export const authRoutes = ({ authModel } : {authModel : AuthModel}) => {
     // authRoutes.get("/me", requireSignin, myuser); //Route para obtener informacion personal
     // authRoutes.get("/user/:id", requireSignin, getUserByID) //Route para obtener informacion de un usuario
 
-    // authRoutes.post("/signin", singin); //Route for user login
+    authRouter.post("/signin", authController.login); //Route for user login
     authRouter.post("/signup", authController.register); //Router for user registration
     // authRoutes.post("logout", logout); //Router for log out
 

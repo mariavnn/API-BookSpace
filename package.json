@@ -33,13 +33,13 @@
     "extends": "standard"
   },
   "dependencies": {
-    "@types/bcryptjs": "2.4.6",
+    "@types/bcrypt": "^6.0.0",
     "@types/cors": "2.8.19",
     "@types/jsonwebtoken": "9.0.10",
-    "bcryptjs": "3.0.2",
+    "bcrypt": "^6.0.0",
     "cors": "2.8.5",
     "express": "5.1.0",
-    "jsonwebtoken": "9.0.2",
+    "jsonwebtoken": "^9.0.2",
     "zod": "4.0.14"
   }
 }
