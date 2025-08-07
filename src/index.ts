@@ -3,11 +3,11 @@ import { authRoutes } from './routes/authRoutes';
 import { corsMiddleware } from './middlewares/cors';
 import { AuthModel } from './models/userModel';
 import { errorHandler } from './middlewares/errorHandler';
+import { PORT } from './config/config';
 
 
 export const createApp = () =>{
     const app = express();
-    const PORT = process.env.PORT || 3000;
 
     //Middlewares
     app.use(json()) //Recuperar el curso de la peticion 
@@ -22,7 +22,7 @@ export const createApp = () =>{
 
     app.use("/auth", authRoutes({ authModel: authModelInstance }));
 
-    app.listen(PORT, () => {
+    app.listen(PORT || 3000, () => {
         console.log(`Server is running on port http://localhost:${PORT}`);
     }) 
 }

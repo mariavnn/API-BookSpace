@@ -1,15 +1,24 @@
-# ## REQUEST PRUEBA 
-# GET http://localhost:3000/ 
+# # # ## REQUEST PRUEBA 
+# GET http://localhost:4000/ 
 
 ## REQUEST REGISTER
-POST http://localhost:3000/auth/signup
+# POST http://localhost:4000/auth/signup
+# Content-Type: application/json
+
+# {
+#     "name": "Victoria Nieto", 
+#     "email": "marianieto29@gmail.com",
+#     "username": "mariavnn22",
+#     "age": 18,
+#     "password": "12345678",
+#     "confirmPassword": "12345678"
+# }
+
+# # REQUEST LOGIN
+POST http://localhost:4000/auth/signin
 Content-Type: application/json
 
 {
-    "name": "Victoria Nieto", 
-    "email": "marianieto29@gmail.com",
     "username": "mariavnn22",
-    "age": 18,
-    "password": "12345678",
-    "confirmPassword": "12345678"
+    "password": "12345678"
 }

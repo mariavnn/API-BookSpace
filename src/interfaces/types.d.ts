@@ -14,3 +14,8 @@ export interface IUserRegister{
     age: number,
     password: string
 }
+
+export interface SearchUser{
+    email?: string;
+    username?: string;
+}
