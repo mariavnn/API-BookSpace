@@ -6,11 +6,7 @@ const createUserSchema = z.object({
     email: z.string().email('Invalid email'),
     username: z.string().nonempty('Username is required').min(3, "Username must be at leat 3 characters long"),
     age: z.number().nonnegative().min(18, "Age must be +18"),    
-    password: z.string().min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z.string().min(8, 'Password must be at least 8 characters'),
-}).refine((data) => data.password === data.confirmPassword, {
-    path: ['confirmPassword'],
-    message: 'Passwords do not match',
+    password: z.string().min(8, 'Password must be at least 8 characters')
 })
 
 const loginSchema = z.object({
@@ -32,4 +28,8 @@ export function validateRegister( object: UserRegister ){
 
 export function validateLogin ( object: UserLogin){
   return loginSchema.safeParse(object);
+}
+
+export function validateParcialUser( object : UserRegister){
+  return createUserSchema.partial().safeParse(object);
 }

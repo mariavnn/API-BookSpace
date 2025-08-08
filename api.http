@@ -1,27 +1,36 @@
-# # # ## REQUEST PRUEBA 
-# GET http://localhost:4000/ 
+### REQUEST PRUEBA 
+GET http://localhost:4000/ 
 
-## REQUEST REGISTER
-# POST http://localhost:4000/auth/signup
-# Content-Type: application/json
+### REQUEST REGISTER
+POST http://localhost:4000/auth/signup
+Content-Type: application/json
 
-# {
-#     "name": "Victoria Nieto", 
-#     "email": "marianieto29@gmail.com",
-#     "username": "mariavnn22",
-#     "age": 18,
-#     "password": "12345678",
-#     "confirmPassword": "12345678"
-# }
+{
+    "name": "Victoria Nieto", 
+    "email": "marianieto29@gmail.com",
+    "username": "mariavnn22",
+    "age": 18,
+    "password": "12345678",
+    "confirmPassword": "12345678"
+}
 
-# # REQUEST LOGIN
-# POST http://localhost:4000/auth/signin
-# Content-Type: application/json
+### REQUEST LOGIN
+POST http://localhost:4000/auth/signin
+Content-Type: application/json
 
-# {
-#     "username": "mariavnn22",
-#     "password": "12345678"
-# }
+{
+    "username": "mariavnn22",
+    "password": "12345678"
+}
 
-# # REQUEST DATOS DE MI USUARIO
+### REQUEST DATOS DE MI USUARIO
 GET http://localhost:4000/auth/me
+
+
+### REQUEST UPDATE DATOS DE MI USUARIO
+PATCH http://localhost:4000/auth/me/update
+Content-Type: application/json
+
+{
+    "name" : "Maria Nieto"
+}

@@ -1,9 +1,8 @@
 export interface User {
-    userId: string;
     name: string;
     email: string;
     username: string;
-    hash_password: string;
+    age: number;
 }
 
 export interface IUserRegister{ 
@@ -13,6 +12,13 @@ export interface IUserRegister{
     username: string,
     age: number,
     password: string
+}
+
+export interface UserUpdate{
+    name?: string,
+    email?: string,
+    username?: string,
+    age?: number,
 }
 
 export interface SearchUser{

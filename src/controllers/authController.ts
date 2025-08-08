@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express"
-import { UserLogin, UserRegister, validateLogin, validateRegister } from "../schemas/authSchema"
+import { UserLogin, UserRegister, validateLogin, validateParcialUser, validateRegister } from "../schemas/authSchema"
 import { AuthService } from "../services/authService";
 import { HttpException } from "../utils/httpException";
 import jwt from "jsonwebtoken";
 import { id } from "zod/v4/locales/index.cjs";
 import { SECRET_JWT_KEY } from "../config/config";
-import { SessionRequest } from "../middlewares/sessionHandler";
+import { SessionRequest } from "../middlewares/validateToken";
+import { IUserRegister, UserUpdate } from "../interfaces/types";
 
 export class AuthController {
     private authService : AuthService;
@@ -57,10 +58,30 @@ export class AuthController {
     myUser = async(req: Request, res:Response, next: NextFunction) =>{
         const sessionReq = req as SessionRequest;
 
-        if(!sessionReq.session.user){
-            return next(new HttpException(401, 'Unathorized'))
+        try{
+            const userPayload = sessionReq.session.user!;
+            const user = await this.authService.myUser(userPayload);
+            return res.status(200).json(user);
+        }catch(err){
+            next(err);
+        }
+    }
+
+    updateUser = async(req: Request, res:Response, next: NextFunction) => {
+        const sessionReq = req as SessionRequest;
+        const result = validateParcialUser(req.body);
+
+        if(!result.success){
+            return next(new HttpException(400, result.error.message))
         }
 
-        return res.status(200).json({ message: "You have access" } );
+        try{
+            const userPayload = sessionReq.session.user!;
+            const user = await this.authService.updateUser(userPayload, result.data as UserUpdate);
+            return res.status(200).json(user);
+        }catch(err){
+            next(err);
+        }
+        
     }
 }
