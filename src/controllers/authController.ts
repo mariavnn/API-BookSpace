@@ -5,6 +5,7 @@ import { HttpException } from "../utils/httpException";
 import jwt from "jsonwebtoken";
 import { id } from "zod/v4/locales/index.cjs";
 import { SECRET_JWT_KEY } from "../config/config";
+import { SessionRequest } from "../middlewares/sessionHandler";
 
 export class AuthController {
     private authService : AuthService;
@@ -42,7 +43,7 @@ export class AuthController {
             return res
                     .cookie('access_token', token, {
                         httpOnly: true, //la cookie solo se usa en el servidor
-                        secure: true, // la cookie solo se puede acceder desde https
+                        secure: process.env.NODE_ENV === 'production', // la cookie solo se puede acceder desde https
                         sameSite: 'strict', //la cookie solo se puede acceder desde el mismo sitio (dominio),
                         maxAge: 1000 * 60 * 60 //la cookie tiene un tiempo de validez de una hora
                     })
@@ -51,5 +52,15 @@ export class AuthController {
             next(err);
         } 
 
+    }
+
+    myUser = async(req: Request, res:Response, next: NextFunction) =>{
+        const sessionReq = req as SessionRequest;
+
+        if(!sessionReq.session.user){
+            return next(new HttpException(401, 'Unathorized'))
+        }
+
+        return res.status(200).json({ message: "You have access" } );
     }
 }
