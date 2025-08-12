@@ -1,0 +1,25 @@
+[
+  {
+    "id": "801bb645-61c0-43ea-8cf8-d8e332651814",
+    "reading-list": [
+      {
+        "id": "5712a3df-6d96-45a1-a926-a21180ebcae6",
+        "googleId": "abYKXvCwEToC",
+        "title": "Harry Potter",
+        "subtitle": "The Story of a Global Business Phenomenon",
+        "authors": [
+          "S. Gunelius"
+        ],
+        "publisher": "Springer",
+        "publishedDate": "2008-06-03",
+        "description": "The Harry Potter books are the bestselling books of all time. In this fascinating study, Susan Gunelius analyzes every aspect of the brand phenomenon that is Harry Potter. Delving into price wars, box office revenue, and brand values, amongst other things, this is the story of the most incredible brand success there has ever been.",
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=abYKXvCwEToC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=abYKXvCwEToC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "status": "to-read",
+        "addedAt": "2025-08-12T17:47:21.113Z"
+      }
+    ]
+  }
+]

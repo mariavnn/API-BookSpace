@@ -1,5 +1,5 @@
 import { IUserRegister, SearchUser, User, UserUpdate} from "../interfaces/types";
-import { AuthModel } from "../models/userModel";
+import { AuthModel } from "../models/authModel";
 import { randomUUID } from "node:crypto";
 import { UserLogin, UserRegister } from "../schemas/authSchema";
 import { HttpException } from "../utils/httpException";

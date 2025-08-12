@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { AuthController } from "../controllers/authController";
 import { AuthService } from "../services/authService";
-import { AuthModel } from "../models/userModel";
+import { AuthModel } from "../models/authModel";
 import { validateToken } from "../middlewares/validateToken";
 import { requireSession } from "../middlewares/requireSession";
 
