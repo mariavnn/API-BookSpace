@@ -3,8 +3,8 @@ import { GOOGLE_BOOK_API_KEY } from "../config/config";
 import { randomUUID } from "node:crypto";
 import { BookModel } from "../models/bookModel";
 import { CustomJwtPayload } from "../middlewares/validateToken";
-import { ReadingListBook } from "../schemas/bookSchema";
-import { AddReadingListBook } from "../interfaces/types";
+import { ReviewBook } from "../schemas/bookSchema";
+import { AddReadingListBook, ReviewBookPost } from "../interfaces/types";
 import { HttpException } from "../utils/httpException";
 
 export class BookService{
@@ -41,6 +41,11 @@ export class BookService{
     }
 
     async addBookToReadingList (userId: CustomJwtPayload, googleId: string, volumenInfo: any){
+        const { id } = userId;
+
+        const user = await this.bookModel.findUser(id);
+        if(!user) throw new HttpException(404, "User not found in reading list");
+
         const bookData : AddReadingListBook = {
             id: randomUUID(),
             googleId,
@@ -55,6 +60,36 @@ export class BookService{
             addedAt: new Date().toISOString(),
         }
 
-        return this.bookModel.saveToReadingList(userId, bookData);
+        return this.bookModel.saveToReadingList(id, bookData);
+    }
+
+    async createBookPost (userId: CustomJwtPayload, bookData: ReviewBook){
+        const { id } = userId;
+         
+        const user = await this.bookModel.findUser(id);
+        if(!user) throw new HttpException(404, "User not found in reading list");
+
+        const newPost ={
+            id: randomUUID(),
+            userId: id,
+            review: bookData.review,
+            bookInfo:{
+                googleId: bookData.googleId,
+                volumenInfo:{
+                    title: bookData.volumenInfo.title,
+                    subtitle: bookData.volumenInfo.subtitle,
+                    authors: bookData.volumenInfo.authors,
+                    publisher: bookData.volumenInfo.publisher,
+                    publishedDate: bookData.volumenInfo.publishedDate,
+                    description: bookData.volumenInfo.description,
+                    imageLinks: bookData.volumenInfo.imageLinks
+
+
+                }
+            },
+            createdAt: new Date().toISOString(),
+        }
+
+        return this.bookModel.createBookPost(newPost as ReviewBookPost);
     }
 }

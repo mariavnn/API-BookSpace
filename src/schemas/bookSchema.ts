@@ -17,9 +17,19 @@ const addBookToReadingList = z.object({
   }),
 });
 
+const reviewBookPost = addBookToReadingList.extend({
+  review: z.string().nonempty('Review is required').max(200, "Review cannot exceed 200 characters"),
+
+})
+
 
 export type ReadingListBook = z.infer<typeof addBookToReadingList>;
+export type ReviewBook = z.infer<typeof reviewBookPost>;
 
-export function validateReadingListBook(object: ReadingListBook){
+export function validateBookInfo(object: ReadingListBook){
     return addBookToReadingList.safeParse(object);
+}
+
+export function validateReview(object: ReviewBook){
+  return reviewBookPost.safeParse(object);
 }

@@ -1,25 +1,31 @@
 import { CustomJwtPayload } from "../middlewares/validateToken";
 import user from "../database/user.json";
 import book from "../database/book.json";
+import review from "../database/review.json"
 import path from "node:path";
 import fs  from "node:fs";
-import { AddReadingListBook } from "../interfaces/types";
+import { AddReadingListBook, ReviewBookPost } from "../interfaces/types";
 import { HttpException } from "../utils/httpException";
 
 const bookDBPath = path.join(__dirname, "../database/book.json");
+const reviewDBPath = path.join(__dirname, "../database/review.json");
 
 export class BookModel{
-    async saveToReadingList(userId: CustomJwtPayload, bookData: AddReadingListBook) {
-        const userExists = user.some((u) => u.id === userId.id) 
-         if (!userExists) {
-            throw new HttpException(404, "User not found")
+    async findUser(id: string){
+        const userExists = user.some((u) => u.id === id)
+        if(!userExists) {
+            return false
         }
 
-        let userReadingList = book.find((b) => b.id === userId.id);
+        return true
+    }
+
+    async saveToReadingList(id: string, bookData: AddReadingListBook) {
+        let userReadingList = book.find((b) => b.id === id);
         if (!userReadingList) {
             
             userReadingList = {
-                id: userId.id,
+                id: id,
                 "reading-list": []
             };
 
@@ -47,5 +53,11 @@ export class BookModel{
     findReadingList (userId: string) {
         const readingList = book.find((b) => b.id === userId);
         return readingList ? readingList["reading-list"] : [];
+    }
+
+    createBookPost (bookData: ReviewBookPost){
+        fs.writeFileSync(reviewDBPath, JSON.stringify(review, null, 2));
+
+        return bookData
     }
 }

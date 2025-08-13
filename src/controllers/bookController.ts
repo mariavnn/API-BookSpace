@@ -1,10 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { HttpException } from "../utils/httpException";
-import axios from 'axios';
-import { GOOGLE_BOOK_API_KEY } from "../config/config";
 import { BookService } from "../services/bookService";
 import { SessionRequest } from "../middlewares/validateToken";
-import { validateReadingListBook } from "../schemas/bookSchema";
+import { ReviewBook, validateBookInfo, validateReview } from "../schemas/bookSchema";
 
 export class BookController{
     private bookService: BookService;
@@ -34,10 +32,10 @@ export class BookController{
     };
 
     getReadingList = async(req: Request, res: Response, next: NextFunction) => {
-        const sessionReq = req as SessionRequest;
+        const sessionReq = req as SessionRequest; // TODO: VOLVER UN MIDDLEWARE
 
         try{
-            const userPayload = sessionReq.session.user!;
+            const userPayload = sessionReq.session.user!; // TODO: VOLVER UN MIDDLEWARE
             const readingList = await this.bookService.getReadingList(userPayload);
             res.status(200).json(readingList);
         }catch(err){
@@ -47,24 +45,39 @@ export class BookController{
 
     addBookToReadingList = async (req: Request, res: Response, next: NextFunction) => {
         const { googleId, volumenInfo } = req.body;
-        const sessionReq = req as SessionRequest;
-        const result = validateReadingListBook(req.body);
+        const sessionReq = req as SessionRequest; // TODO: VOLVER UN MIDDLEWARE
+        const result = validateBookInfo(req.body);
         
 
         if(!result.success){
             return next(new HttpException(400, result.error.message))
         }
 
-        if(!googleId || !volumenInfo){
-            return next(new HttpException(400, "Missing required fields"));
-        }
-
         try{
-            const userPayload = sessionReq.session.user!;
+            const userPayload = sessionReq.session.user!; // TODO: VOLVER UN MIDDLEWARE
             const addedBook = await this.bookService.addBookToReadingList( userPayload, googleId, volumenInfo );
             res.status(201).json(addedBook);
         }catch(err){
             next(err);
         }
+    }
+
+    createReviewPost = async(req: Request, res: Response, next: NextFunction) => {
+        const sessionReq = req as SessionRequest; // TODO: VOLVER UN MIDDLEWARE
+        const result = validateReview(req.body);
+
+        if(!result.success){
+            return next(new HttpException(400, result.error.message))
+        }
+
+        try{
+            const userPayload = sessionReq.session.user!;
+            const newPost = await this.bookService.createBookPost( userPayload, req.body as ReviewBook);
+            return res.status(201).json({ message: "Reseña creada con éxito", post: newPost });
+        }catch(err){
+            next(err);
+        }
+
+
     }
 }

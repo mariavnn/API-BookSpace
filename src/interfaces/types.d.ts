@@ -43,3 +43,26 @@ interface AddReadingListBook {
   addedAt: string;
 }
 
+export interface ReviewBookPost {
+  id: string;
+  userId: string;
+  review: string;
+  bookInfo: {
+    googleId: string;
+    volumenInfo: {
+      title: string;
+      subtitle?: string; 
+      authors: string[];
+      publisher: string;
+      publishedDate: string;
+      description: string;
+      imageLinks: {
+        smallThumbnail: string;
+        thumbnail: string;
+      };
+    };
+  };
+  createdAt: string;
+}
+
+
