@@ -43,4 +43,9 @@ export class BookModel{
 
         return bookData;
     }
+
+    findReadingList (userId: string) {
+        const readingList = book.find((b) => b.id === userId);
+        return readingList ? readingList["reading-list"] : [];
+    }
 }

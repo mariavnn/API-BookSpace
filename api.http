@@ -58,3 +58,6 @@ Content-Type: application/json
     }
   }
 }
+
+### GET READING LIST FROM USER
+GET http://localhost:4000/book/reading-list

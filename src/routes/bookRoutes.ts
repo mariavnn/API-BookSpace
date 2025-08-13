@@ -12,7 +12,7 @@ export const bookRoutes = ({bookModel} : {bookModel: BookModel}) => {
     
 
     bookRouter.get('/search', requireSession, bookController.searchBook) //Route para buscar libros usando Google API
-
+    bookRouter.get('/reading-list', requireSession, bookController.getReadingList) //Route para obtener la lista de libros que el usuario está leyendo
     bookRouter.post('/add-reading-list', requireSession, bookController.addBookToReadingList) //Route para agregar libros a la lista de lectura
 
     return bookRouter;

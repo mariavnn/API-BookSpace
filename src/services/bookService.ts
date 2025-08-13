@@ -5,6 +5,7 @@ import { BookModel } from "../models/bookModel";
 import { CustomJwtPayload } from "../middlewares/validateToken";
 import { ReadingListBook } from "../schemas/bookSchema";
 import { AddReadingListBook } from "../interfaces/types";
+import { HttpException } from "../utils/httpException";
 
 export class BookService{
     private bookModel : BookModel
@@ -29,6 +30,14 @@ export class BookService{
             total: response.data.totalItems,
             books: response.data.items
         };
+    }
+
+    async getReadingList(userId: CustomJwtPayload){
+        const { id } = userId;
+        const readingList = await this.bookModel.findReadingList(id);
+        if(!readingList) throw new HttpException(404, "Reading list not found");
+
+        return readingList;
     }
 
     async addBookToReadingList (userId: CustomJwtPayload, googleId: string, volumenInfo: any){

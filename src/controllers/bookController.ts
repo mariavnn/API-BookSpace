@@ -33,6 +33,18 @@ export class BookController{
         }
     };
 
+    getReadingList = async(req: Request, res: Response, next: NextFunction) => {
+        const sessionReq = req as SessionRequest;
+
+        try{
+            const userPayload = sessionReq.session.user!;
+            const readingList = await this.bookService.getReadingList(userPayload);
+            res.status(200).json(readingList);
+        }catch(err){
+            next(err);
+        }
+    }
+
     addBookToReadingList = async (req: Request, res: Response, next: NextFunction) => {
         const { googleId, volumenInfo } = req.body;
         const sessionReq = req as SessionRequest;
